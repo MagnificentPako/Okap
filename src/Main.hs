@@ -10,7 +10,7 @@ import           SkinIni
 for = flip map
 main :: IO ()
 main = do
-    Data.Text.IO.writeFile "Okap/Skin.ini" ini
+    Data.Text.IO.writeFile "Okap/skin.ini" ini
 
     font' <- loadFontFile "font.ttf"
     case font' of

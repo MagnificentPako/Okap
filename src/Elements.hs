@@ -8,6 +8,7 @@ import           Elements.Standard.ApproachCircle
 import           Elements.Standard.Followpoint
 import           Elements.Standard.HitCircle
 import           Elements.Standard.HitCircleOverlay
+import           Elements.Standard.ReverseArrow
 import           Elements.UI.Cursor
 import           Elements.UI.MenuSnow
 import           Graphics.Rasterific
@@ -15,77 +16,69 @@ import           Graphics.Rasterific.Texture
 
 transparent = PixelRGBA8 255 255 255 0
 
-approachCircle = renderDrawing
-    (truncate approachCircleSize)
-    (truncate approachCircleSize)
-    transparent
+renderSquare size img = renderDrawing
+        size
+        size
+        transparent
+        img
+
+renderSquare' size img = renderSquare (truncate size) img
+
+approachCircle = renderSquare'
+    approachCircleSize
     approachCircleImg
 
-approachCircleHD = renderDrawing
-    (truncate approachCircleSizeHD)
-    (truncate approachCircleSizeHD)
-    transparent
+approachCircleHD = renderSquare'
+    approachCircleSizeHD
     approachCircleImgHD
 
-hitCircle = renderDrawing
-    (truncate hitCircleSize)
-    (truncate hitCircleSize)
-    transparent
+hitCircle = renderSquare'
+    hitCircleSize
     hitCircleImg
 
-hitCircleHD = renderDrawing
-    (truncate hitCircleSizeHD)
-    (truncate hitCircleSizeHD)
-    transparent
+hitCircleHD = renderSquare'
+    hitCircleSizeHD
     hitCircleImgHD
 
-hitCircleOverlay = renderDrawing
-    (truncate hitCircleOverlaySize)
-    (truncate hitCircleOverlaySize)
-    transparent
+hitCircleOverlay = renderSquare'
+    hitCircleOverlaySize
     hitCircleOverlayImg
 
-hitCircleOverlayHD = renderDrawing
-    (truncate hitCircleOverlaySizeHD)
-    (truncate hitCircleOverlaySizeHD)
-    transparent
+hitCircleOverlayHD = renderSquare'
+    hitCircleOverlaySizeHD
     hitCircleOverlayImgHD
 
-menuSnow font = renderDrawing
+menuSnow font = renderSquare
     menuSnowSize
-    menuSnowSize
-    transparent
     (menuSnowImg font)
 
-menuSnowHD font = renderDrawing
+menuSnowHD font = renderSquare
     menuSnowSizeHD
-    menuSnowSizeHD
-    transparent
     (menuSnowImgHD font)
 
-cursor = renderDrawing
-    (truncate cursorSize)
-    (truncate cursorSize)
-    transparent
+cursor = renderSquare'
+    cursorSize
     cursorImg
 
-cursorHD = renderDrawing
-    (truncate cursorSizeHD)
-    (truncate cursorSizeHD)
-    transparent
+cursorHD = renderSquare'
+    cursorSizeHD
     cursorImgHD
 
-followpoint = renderDrawing
-        (truncate followpointSize)
-        (truncate followpointSize)
-        transparent
+followpoint = renderSquare'
+        followpointSize
         followpointImg
 
-followpointHD = renderDrawing
-    (truncate followpointSizeHD)
-    (truncate followpointSizeHD)
-    transparent
+followpointHD = renderSquare'
+    followpointSizeHD
     followpointImgHD
+
+reverseArrow = renderSquare'
+    reverseArrowSize
+    reverseArrowImg
+
+reverseArrowHD = renderSquare'
+    reverseArrowSizeHD
+    reverseArrowImgHD
 
 empty = renderDrawing
         1
@@ -108,7 +101,9 @@ mkSkinElements font =
     , ("cursor.png",              cursor)
     , ("cursor@2x.png",           cursorHD)
     , ("followpoint.png",         followpoint)
-    , ("followpoint@2x.png",         followpointHD)
+    , ("followpoint@2x.png",      followpointHD)
+    , ("reversearrow.png",        reverseArrow)
+    , ("reversearrow@2x.png",      reverseArrowHD)
     ] ++ (numbers font)
       ++ (numbersHD font)
       ++ mkEmpty [ "hit300.png"
@@ -118,4 +113,5 @@ mkSkinElements font =
                  , "hit300k.png"
                  , "hit300k@2x.png"
                  , "sliderendcircle.png"
+                 , "sliderendcircleoverlay.png"
                  ]

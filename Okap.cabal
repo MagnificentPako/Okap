@@ -23,6 +23,7 @@ executable Okap
                        Elements.Standard.HitCircle,
                        Elements.Standard.HitCircleOverlay,
                        Elements.Standard.Followpoint,
+                       Elements.Standard.ReverseArrow,
                        Elements.Numbers,
                        Elements.UI.MenuSnow,
                        Elements.UI.Cursor
